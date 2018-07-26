@@ -1,5 +1,17 @@
+@import './fonts.scss';
+
+// https://stackoverflow.com/questions/46910998/how-to-change-bootstrap-4-font-size?rq=1
+
+// https://flatuicolors.com/
+
+// Body
+$body-bg: #ecf0f1;
+
+// Typography
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Bootstrap 4
+@import '../node_modules/bootstrap/scss/bootstrap';
+
 @import '../node_modules/font-awesome/css/font-awesome.css';
-
-$sample_color: orange;
-
-body {color: $sample_color;}
