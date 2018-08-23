@@ -1,15 +1,12 @@
 import React from 'react';
 
-import NavBar from './components/nav_bar';
+import NavBar from './components/bootstrap4/nav_bar';
 
-const App = () => (
+const App = ({children}) => (
   <div>
     <NavBar />
     <div className='container'>
-      <h1>Hello from React!?</h1>
-      <i className='fa fa-bars'></i>
-      <p>Lorem ipsum dolores...</p>
-      <p className='monospace'>Lorem ipsum dolores...</p>
+      {children}
     </div>
   </div>
 );

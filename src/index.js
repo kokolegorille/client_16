@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import 'babel-polyfill';
 
@@ -8,10 +9,10 @@ import 'bootstrap';
 
 import './app.scss';
 
-import App from './app';
+import routes from './routes';
 
 const app = document.getElementById('app');
 render(
-  <App />,
+  <Router>{routes}</Router>,
   app,
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = () => (
 <nav className="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark">
@@ -11,9 +11,8 @@ const NavBar = () => (
 
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav mr-auto">
-        <li className="nav-item">
-          <a className="nav-link" href="#">Link</a>
-        </li>
+        <li className="nav-item"><NavLink exact className="nav-link" activeClassName="active" to="/">Home</NavLink></li>
+        <li className="nav-item"><NavLink to="/about" className="nav-link">About</NavLink></li>
       </ul>
     </div>
   </div>

@@ -12,12 +12,17 @@ const ROOT_PATH = path.resolve(__dirname);
 const SRC_PATH = path.resolve(ROOT_PATH, 'src');
 const BUILD_PATH = path.resolve(ROOT_PATH, './build');
 
+const VENDOR_LIBS = [
+  'react', 'react-dom', 'bootstrap', 'jquery', 'popper.js', 'react-router-dom'
+]
+
 // Webpack plugins
 // Replace ExtractTextPlugin with MiniCssExtractPlugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 // For dev server
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -26,12 +31,13 @@ module.exports = (env, options) => ({
   devtool: env && env.dev ? 'inline-sourcemap' : false,
   entry: {
     bundle: SRC_PATH + '/index',
+    vendor: VENDOR_LIBS,
   },
   output: {
     path: BUILD_PATH,
     publicPath: '',
-    filename: 'js/[name].js',
-    chunkFilename: '[name].bundle.js',
+    filename: 'js/[name].[hash].js',
+    chunkFilename: 'js/[name].js',
   },
 
   plugins: [
@@ -47,7 +53,7 @@ module.exports = (env, options) => ({
 
     // BEWARE OF FILENAME PATH!
     new MiniCssExtractPlugin({ filename: './css/app.css' }),
-    new CopyWebpackPlugin([{ from: BUILD_PATH, to: '../' }]),
+    // new CopyWebpackPlugin([{ from: SRC_PATH, to: BUILD_PATH }]),
     
     // Webpack dev server
     new HtmlWebpackPlugin({
@@ -55,13 +61,25 @@ module.exports = (env, options) => ({
       template: './src/index.template',
       inject: 'body'
     }),
+    new Webpack.HotModuleReplacementPlugin(),
   ],
 
   optimization: {
+    // https://github.com/webpack/webpack/issues/6357
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /react|bootstrap/,
+          chunks: "initial",
+          name: "vendor",
+          enforce: true
+        }
+      }
+    },
     minimizer: [
       new UglifyJsPlugin({ cache: true, parallel: true, sourceMap: false }),
       new OptimizeCSSAssetsPlugin({})
-    ]
+    ],
   },
 
   resolve: {
@@ -107,6 +125,9 @@ module.exports = (env, options) => ({
     ],
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    compress: true,
+    open: true,
+    hot: true,
   },
 });
