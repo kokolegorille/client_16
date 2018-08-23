@@ -4,10 +4,17 @@ import NavBar from './components/bootstrap4/nav_bar';
 
 const App = ({children}) => (
   <div>
-    <NavBar />
-    <div className='container'>
+    <header>
+      <NavBar />
+    </header>
+    <main role="main" className="container">
       {children}
-    </div>
+    </main>
+    <footer className="footer">
+      <div className='container'>
+        <p className="text-muted">klg 2018</p>
+      </div>
+    </footer>
   </div>
 );
 
