@@ -21,7 +21,6 @@ const VENDOR_LIBS = [
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // For dev server
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -53,7 +52,6 @@ module.exports = (env, options) => ({
 
     // BEWARE OF FILENAME PATH!
     new MiniCssExtractPlugin({ filename: './css/app.css' }),
-    // new CopyWebpackPlugin([{ from: SRC_PATH, to: BUILD_PATH }]),
     
     // Webpack dev server
     new HtmlWebpackPlugin({
