@@ -12,7 +12,7 @@ const App = ({children}) => (
     </main>
     <footer className="footer">
       <div className='container'>
-        <p className="text-muted">klg 2018</p>
+        <p className="text-muted">&copy; Copyright klg 2018</p>
       </div>
     </footer>
   </div>
